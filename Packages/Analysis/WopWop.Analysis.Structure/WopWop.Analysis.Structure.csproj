@@ -6,13 +6,15 @@
       <LangVersion>preview</LangVersion>
       <Version>0.0.1</Version>
       <PackageId>WopWop.Analysis.Structure</PackageId>
-      <Version>0.0.1</Version>
       <Authors>Kiwi</Authors>
       <Company>The WopWops</Company>
-      <GeneratedAssemblyInfoFile>Properties/AssemblyInfo.cs</GeneratedAssemblyInfoFile>
-    <EnablePackageValidation>true</EnablePackageValidation>
-    <PackRelease>true</PackRelease>
-    <IsPublishable>true</IsPublishable>
+      <EnablePackageValidation>true</EnablePackageValidation>
+
+    <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
+    <GenerateAssemblyInformationalVersionAttribute>false</GenerateAssemblyInformationalVersionAttribute>
+    <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
+      <PackRelease>true</PackRelease>
+      <IsPublishable>true</IsPublishable>
   </PropertyGroup>
 
     <ItemGroup>
