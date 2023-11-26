@@ -1,0 +1,98 @@
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using WopWop.Analysis.Structure;
+using WopWop.Analysis.Structure.Data;
+
+namespace WopWop.Analysis.Flow;
+
+public class DataFlowTracker
+{
+    public static List<Flonertainment> SummarizeDataFlow(EnrichedMachineCandidate candidate)
+    {
+        var identifierDatumKinds = new Dictionary<SyntaxToken, DatumKind>();
+
+        DatumKind GetKind(SyntaxToken token)
+        {
+            if (!identifierDatumKinds.ContainsKey(token)) identifierDatumKinds.Add(token, DatumKind.LocalVariable);
+            return identifierDatumKinds[token];
+        }
+        
+        foreach (var member in candidate.ClassSyntax.Members)
+        {
+            if (member is FieldDeclarationSyntax f)
+            {
+                foreach (var v in f.Declaration.Variables)
+                {
+                    identifierDatumKinds.Add(v.Identifier, DatumKind.MemberField);
+                }
+            }
+            else if (member is PropertyDeclarationSyntax p)
+            {
+                identifierDatumKinds.Add(p.Identifier, DatumKind.MemberProperty);
+            }
+            else if (member is IndexerDeclarationSyntax i)
+            {
+                // TODO
+            }
+        }
+        foreach (var parameter in candidate.MethodSyntax.ParameterList.Parameters)
+        {
+            identifierDatumKinds.Add(parameter.Identifier, DatumKind.Parameter);
+        }
+        var events = new List<FlowEvent>();
+        var statements = candidate.MethodSyntax.Body.Statements;
+        foreach (var stmt in statements)
+        {
+            var stmtLocalDeclarations = stmt
+                .DescendantNodesAndSelf()
+                .OfType<LocalDeclarationStatementSyntax>()
+                .ToList();
+            foreach (var local in stmtLocalDeclarations)
+            {
+                foreach (var v in local.Declaration.Variables)
+                {
+                    var id = v.Identifier.Text;
+                    var t = local.Declaration.Type.ToString();
+                    var val = v.Initializer.Value.ToString();
+                    events.Add(FlowEvent.NewDeclaration(Datum.New(id, GetKind(v.Identifier)), local.Span, t, val));
+                    var rightSide = v.Initializer.Value.DescendantNodesAndSelf().OfType<IdentifierNameSyntax>();
+                    foreach (var rs in rightSide)
+                    {
+                        events.Add(FlowEvent.NewRetrieval(
+                            Datum.New(rs.Identifier.Text, GetKind(rs.Identifier)),
+                            local.Span,
+                            v.Initializer.Value.ToString(),
+                            local.Declaration.ToString()));
+                    }
+                }
+            }
+            
+            var stmtAssignments = stmt
+                .DescendantNodesAndSelf()
+                .OfType<AssignmentExpressionSyntax>()
+                .ToList();
+            foreach (var a in stmtAssignments)
+            {
+                var leftVariables = a.Left.DescendantNodesAndSelf().OfType<IdentifierNameSyntax>();
+                var rightVariables = a.Right.DescendantNodesAndSelf().OfType<IdentifierNameSyntax>();
+                foreach (var l in leftVariables)
+                {
+                    events.Add(FlowEvent.NewAssignment(
+                        Datum.New(l.Identifier.Text, GetKind(l.Identifier)),
+                        a.Span,
+                        a.Right.ToString()));   
+                }
+                foreach (var r in rightVariables)
+                {
+                    events.Add(FlowEvent.NewRetrieval(
+                        Datum.New(r.Identifier.Text, GetKind(r.Identifier)),
+                        a.Span,
+                        a.Right.ToString(),
+                        a.Left.ToString()));   
+                }
+            }
+        }
+
+        return events;
+    }
+}
