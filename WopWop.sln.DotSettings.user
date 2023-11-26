@@ -1,0 +1,24 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=1033acb3_002D0efe_002D4267_002D9112_002D0da4a04cb695/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="CreatesManifestAttribute" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;xUnit::9088A5C2-4AE8-4ECD-9E1C-143135FCB9F7::net8.0::WopWop.Analysis.Tests.MachineAnnotatorTest.CreatesManifestAttribute&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::9088A5C2-4AE8-4ECD-9E1C-143135FCB9F7::net8.0::WopWop.Analysis.Tests.CandidateAnalyzerTest.IdentifiesAsyncMethodsUsingCustomTask&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::9088A5C2-4AE8-4ECD-9E1C-143135FCB9F7::net8.0::WopWop.Analysis.Tests.Data.DataFlowTrackerTest.TracksThreeVariableEventTypes&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::9088A5C2-4AE8-4ECD-9E1C-143135FCB9F7::net8.0::WopWop.Analysis.Tests.Data.DataFlowTrackerTest.DifferentiatesDatumKind&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::9088A5C2-4AE8-4ECD-9E1C-143135FCB9F7::net8.0::WopWop.Analysis.Tests.StepFinderTest.FindsAsyncSteps&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::9088A5C2-4AE8-4ECD-9E1C-143135FCB9F7::net8.0::WopWop.Analysis.Tests.StepFinderTest.IncludesBlockSyntaxForClearerCodeAsync&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
+	
+	<s:Boolean x:Key="/Default/UnloadedProject/UnloadedProjects/=42e3c02f_002D83d9_002D4a93_002D99e7_002D5cac20827c8f_0023Sprouter_002EEntities/@EntryIndexedValue">True</s:Boolean>
+	
+	<s:Boolean x:Key="/Default/UnloadedProject/UnloadedProjects/=72a19e3f_002Deadc_002D4830_002Db9c5_002Daa3bc58c30f9_0023Sprouter/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/UnloadedProject/UnloadedProjects/=892063aa_002De502_002D40fb_002Dbac3_002D2693abfe31ed_0023Sprouter_002ETests/@EntryIndexedValue">True</s:Boolean>
+	
+	
+	
+	
+	
+	
+	
+	</wpf:ResourceDictionary>
